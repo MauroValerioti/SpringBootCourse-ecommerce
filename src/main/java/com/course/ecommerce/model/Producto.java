@@ -11,6 +11,7 @@ public class Producto {
 	private String Descripcion;
 	private String imagen;
 	private double precio;
+	private double total;
 	private int cantidad;
 	
 	public Producto(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad) {
