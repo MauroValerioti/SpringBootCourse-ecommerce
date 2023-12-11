@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <!--le indico que use el motor de plantillas Thymeleaf-->
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
@@ -19,6 +18,7 @@
 	<!-- Custom styles for this template -->
 	<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -26,9 +26,9 @@
 	<!-- Navigation -->
 	<div th:include="administrador/template_admin.html::header"></div>
 
-
 	<!-- Page Content -->
 	<div class="container">
+
 
 
 		<!-- Page Heading/Breadcrumbs -->
@@ -38,16 +38,18 @@
 
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-			<li class="breadcrumb-item active">Crear Productos</li>
+			<li class="breadcrumb-item active">Actualizar Producto</li>
 		</ol>
 
-		<h2>Crear Producto</h2>
-		<form class="form-horizontal" th:action="@{/productos/save}" method="post" enctype="multipart/form-data">
+		<h2>Actualizar Producto</h2>
+		<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="nombre">Nombre:</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="nombre" name="nombre"
-						placeholder="Ingrese el nombre del producto" autocomplete="off" required>
+						placeholder="Ingrese el nombre del producto" required autocomplete="off" value="">
+					<div id="prueba"></div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -62,7 +64,7 @@
 				<label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
 				<div class="col-sm-10">
 					<input type="number" class="form-control" id="cantidad" name="cantidad"
-						placeholder="Ingrese la cantidad del producto" required autocomplete="off">
+						placeholder="Ingrese la cantidad del producto" value="" required autocomplete="off">
 				</div>
 			</div>
 
@@ -70,7 +72,7 @@
 				<label class="control-label col-sm-2" for="precio">Precio:</label>
 				<div class="col-sm-10">
 					<input type="number" class="form-control" step="any" id="precio" name="precio"
-						placeholder="Ingrese el precio del producto" autocomplete="off" required>
+						placeholder="Ingrese el precio del producto" value="" required autocomplete="off">
 				</div>
 			</div>
 
@@ -83,16 +85,15 @@
 
 			<div class="row">
 				<div class="col-sm-2">
-					<button type="submit" class="btn btn-success">
-						<span class="glyphicon glyphicon-saved"></span> Guardar
-					</button>
+					<button type="submit" class="btn btn-success"> Guardar</button>
 				</div>
 			</div>
 
 		</form>
 
 	</div>
-	
+	<!-- /.container -->
+
 	<!-- Footer -->
 	<div th:include="administrador/template_admin.html::footer"></div>
 

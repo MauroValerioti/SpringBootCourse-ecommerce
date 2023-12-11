@@ -59,7 +59,10 @@
 					<td th:text="${producto.cantidad}"></td>
 					<td th:text="${producto.precio}"></td>
 
-					<td><a class="btn btn-warning" href="">Editar</a> </td>
+					
+					<!--en editar debo apuntar directo al metodo del productoController que se encargara de editar el producto-->
+					<!--apunta al controlador productos, leugo a la url edit, le pasamos un id y ademas debemos indicarle que valor va a ser el parametro id-->
+					<td><a class="btn btn-warning" th:href="@{producto/edit/{id} (id=${producto.id}) }">Editar</a> </td>
 					<td><a class="btn btn-danger" href="">Eliminar</a> </td>
 				</tr>
 			</tbody>
