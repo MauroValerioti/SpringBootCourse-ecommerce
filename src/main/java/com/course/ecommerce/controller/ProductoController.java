@@ -62,4 +62,20 @@ public class ProductoController {
 		
 		return "productos/edit";
 	}
+	
+//	@GetMapping("/edit/{id}")
+//	public String edit(@PathVariable Integer id, Model model) {
+//	    Optional<Producto> optionalProducto = productoService.get(id);
+//	    
+//	    if (optionalProducto.isPresent()) {
+//	        Producto producto = optionalProducto.get();
+//	        LOGGER.info("Producto buscado: {}", producto);
+//	        model.addAttribute("producto", producto);  // Agrega el producto al modelo con el nombre "producto"
+//	        return "productos/edit";
+//	    } else {
+//	        // Puedes manejar el caso en que el producto no se encuentra, por ejemplo, redirigiendo a una página de error.
+//	        return "redirect:/error";
+//	    }
+//	}
+
 }
