@@ -53,21 +53,30 @@ public class ProductoController {
 	}
 
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable Integer id, Model model) { //@PathVariable nos permite mapear la variable que viene a la url.
+	public String edit(@PathVariable Integer id, Model model) { // @PathVariable nos permite mapear la variable que
+																// viene a la url.
 		Producto producto = new Producto();
-		Optional<Producto> optionalProducto = productoService.get(id); //esto es lo que devuelve cuando hago la consulta por un elemento de tipo producto.
+		Optional<Producto> optionalProducto = productoService.get(id); // esto es lo que devuelve cuando hago la
+																		// consulta por un elemento de tipo producto.
 		producto = optionalProducto.get();
-		
-		LOGGER.info("Producto buscado: {}", producto); //el LOGGER me permitira ver en la consola la variable que va a venir dentro de producto.
+
+		LOGGER.info("Producto buscado: {}", producto); // el LOGGER me permitira ver en la consola la variable que va a
+														// venir dentro de producto.
 		model.addAttribute("producto", producto);
-		
+
 		return "productos/edit";
 	}
-	
-	
+
 	@PostMapping("/update")
-	public String update(Producto producto ) {
+	public String update(Producto producto) {
 		productoService.update(producto);
+		return "redirect:/productos";
+	}
+
+	// tengo que obtener el id al cual voy a mapearlo antes de borarlo
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id) {
+		productoService.delete(id);
 		return "redirect:/productos";
 	}
 
