@@ -53,29 +53,22 @@ public class ProductoController {
 	}
 
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable Integer id) { //@PathVariable nos permite mapear la variable que viene a la url.
+	public String edit(@PathVariable Integer id, Model model) { //@PathVariable nos permite mapear la variable que viene a la url.
 		Producto producto = new Producto();
 		Optional<Producto> optionalProducto = productoService.get(id); //esto es lo que devuelve cuando hago la consulta por un elemento de tipo producto.
 		producto = optionalProducto.get();
 		
 		LOGGER.info("Producto buscado: {}", producto); //el LOGGER me permitira ver en la consola la variable que va a venir dentro de producto.
+		model.addAttribute("producto", producto);
 		
 		return "productos/edit";
 	}
 	
-//	@GetMapping("/edit/{id}")
-//	public String edit(@PathVariable Integer id, Model model) {
-//	    Optional<Producto> optionalProducto = productoService.get(id);
-//	    
-//	    if (optionalProducto.isPresent()) {
-//	        Producto producto = optionalProducto.get();
-//	        LOGGER.info("Producto buscado: {}", producto);
-//	        model.addAttribute("producto", producto);  // Agrega el producto al modelo con el nombre "producto"
-//	        return "productos/edit";
-//	    } else {
-//	        // Puedes manejar el caso en que el producto no se encuentra, por ejemplo, redirigiendo a una página de error.
-//	        return "redirect:/error";
-//	    }
-//	}
+	
+	@PostMapping("/update")
+	public String update(Producto producto ) {
+		productoService.update(producto);
+		return "redirect:/productos";
+	}
 
 }
