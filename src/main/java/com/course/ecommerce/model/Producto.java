@@ -9,7 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -51,7 +52,5 @@ public class Producto {
 				+ ", precio=" + precio + ", cantidad=" + cantidad + ", usuario=" + usuario + ", detalleOrdenes="
 				+ detalleOrdenes + "]";
 	}
-
-
 
 }
