@@ -22,30 +22,33 @@
 <body>
 
 	<!-- Navigation -->
-	<div th:include="administrador/template_admin.html::header"></div>
+	<!--heredamos la plantilla que creamos en el template_usuario ingresando la carpeta que contiene al template y finalmente el fragmento que usare-->
+	<div th:include="usuario/template_usuario.html::header">
+
+	</div>
 
 	<!-- Page Content -->
 	<div class="container">
 
 		<!-- Jumbotron Header -->
 		<header class="jumbotron my-4">
-			<h1 class="display-3">Bienvenido a Spring Ecommerce 2023</h1>
+			<h1 class="display-3">Bienvenido a Spring Ecommerce 2021</h1>
 			<p class="lead">Tu tienda de productos en Línea</p>
 		</header>
 
-		<!-- Page Features -->
+			<!-- Page Features -->
 		<div class="row text-center">
 
 			<div class="col-lg-3 col-md-6 mb-4" th:each="producto: ${productos}">
 				<!--este productos es el mismo que declaramos en administradorController-->
 				<div class="card h-100">
-					<img class="card-img-top" th:src="@{/images/{img} (img=${producto.imagen})}"
+					<img class="card-img-top" th:src="@{/images/{img} (img=${producto.imagen}) }"
 						alt=""><!--obtengo la imagen del producto-->
 					<div class="card-body">
 						<p class="card-text" th:text="${producto.nombre}"></p><!--obtengo el nombre del producto-->
 					</div>
 					<div class="card-footer">
-						<a href="productohome.html" class="btn btn-success">Ver producto</a>
+						<a th:href="@{/productohome/{id} (id=${producto.id}) }" class="btn btn-success">Ver producto</a>
 					</div>
 				</div>
 			</div>
@@ -56,11 +59,15 @@
 	</div>
 	<!-- /.container -->
 
-	<div th:include="administrador/template_admin.html::footer"></div>
+	<!-- Footer -->
+	<div th:include="usuario/template_usuario.html::footer">
+
+	</div>
 
 	<!-- Bootstrap core JavaScript -->
 	<script th:src="@{vendor/jquery/jquery.min.js}"></script>
 	<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
 
 </body>
 
