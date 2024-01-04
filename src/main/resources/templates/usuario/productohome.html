@@ -20,7 +20,7 @@
 
 <body>
 
-	<!-- Navigation --> <!-- Navigation -->
+	<!-- Navigation -->
 	<!--heredamos la plantilla que creamos en el template_usuario ingresando la carpeta que contiene al template y finalmente el fragmento que usare-->
 	<div th:include="usuario/template_usuario.html::header">
 
@@ -45,11 +45,13 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-lg-6">
-						<a href="#"> <img class="img-fluid rounded" th:src="@{/images/{img} (img=${producto.imagen}) }" alt="">
+						<a href="#"> <img class="img-fluid rounded" th:src="@{/images/{img} (img=${producto.imagen}) }"
+								alt="">
 						</a>
 					</div>
 					<div class="col-lg-6">
-						<form action="carrito.html" method="POST">
+						<form th:action="@{/cart}" method="POST"> <!--el carrito lo levanto del formulario ya que voy a necesitar llevarme varios datos cuando levante el producto.-->
+						<input type="hidden" th:value="${producto.id}" name="id"><!--esta etiqueta oculta nos va a brindar el id del producto actual para cuando quiera neviarlo al carrito-->
 							<h2 class="card-title" th:text="${producto.nombre}"></h2>
 
 							<ul class="list-group">
