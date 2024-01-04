@@ -83,15 +83,23 @@ public class HomeController {
 		detalleOrden.setNombre(producto.getNombre());
 		detalleOrden.setTotal(producto.getPrecio() * cantidad);
 		detalleOrden.setProducto(producto); // producto al que esta vinculado la orden
+		
+		
+		//validar que el producto no se pueda agregar mas de una vez.
+		Integer idProducto = producto.getId();
+		boolean ingresado = detalles.stream().anyMatch(p-> p.getProducto().getId() == idProducto); //funcion lambda de la API Java 8
+		
+		if (!ingresado) {
+			detalles.add(detalleOrden);
+		}
 
-		detalles.add(detalleOrden);
 
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum(); // funcion lambda para sumar todos los
 																				// productos que esten en la lista
-
 		orden.setTotal(sumaTotal);
 		model.addAttribute("cart", detalles); // agrega todos los detalles que va pasando el usuario
 		model.addAttribute("orden", orden);
+		
 
 		return "usuario/carrito";
 	}
@@ -122,4 +130,13 @@ public class HomeController {
 		return "usuario/carrito";
 	}
 
+	@GetMapping("/getCart")
+	public String getcart(Model model) {
+		
+		model.addAttribute("cart", detalles); // agrega todos los detalles que va pasando el usuario
+		model.addAttribute("orden", orden); //detalles y orden son atributos globales.
+		
+		return "/usuario/carrito";
+	}
+	
 }
