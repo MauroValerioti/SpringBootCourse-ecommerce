@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.course.ecommerce.model.Producto;
-import com.course.ecommerce.services.ProductoService;
+import com.course.ecommerce.service.ProductoService;
 
 
 @Controller

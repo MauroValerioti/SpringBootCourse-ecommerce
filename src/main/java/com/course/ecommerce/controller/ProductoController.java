@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.course.ecommerce.model.Producto;
 import com.course.ecommerce.model.Usuario;
-import com.course.ecommerce.services.ProductoService;
-import com.course.ecommerce.services.UploadFileService;
+import com.course.ecommerce.service.ProductoService;
+import com.course.ecommerce.service.UploadFileService;
 
 @Controller
 @RequestMapping("/productos")

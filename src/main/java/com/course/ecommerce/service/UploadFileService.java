@@ -1,4 +1,4 @@
-package com.course.ecommerce.services;
+package com.course.ecommerce.service;
 
 import java.io.File;
 import java.io.IOException;

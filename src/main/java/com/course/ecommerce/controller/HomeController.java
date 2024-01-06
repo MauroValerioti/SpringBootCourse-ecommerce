@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.course.ecommerce.model.DetalleOrden;
 import com.course.ecommerce.model.Orden;
 import com.course.ecommerce.model.Producto;
-import com.course.ecommerce.services.ProductoService;
+import com.course.ecommerce.model.Usuario;
+import com.course.ecommerce.service.IUsuarioService;
+import com.course.ecommerce.service.ProductoService;
 
 @Controller
 @RequestMapping("/") // el '/' solo implica que va a apuntar a la raiz de la pagina
@@ -30,6 +32,9 @@ public class HomeController {
 
 	@Autowired // la notacion autowired es para que inyecte el contenedor del framework
 	private ProductoService productoService;
+
+	@Autowired // hago esto par aobtener el usuario luego y mandarlo a la vista
+	private IUsuarioService usuarioService;
 
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -83,23 +88,21 @@ public class HomeController {
 		detalleOrden.setNombre(producto.getNombre());
 		detalleOrden.setTotal(producto.getPrecio() * cantidad);
 		detalleOrden.setProducto(producto); // producto al que esta vinculado la orden
-		
-		
-		//validar que el producto no se pueda agregar mas de una vez.
+
+		// validar que el producto no se pueda agregar mas de una vez.
 		Integer idProducto = producto.getId();
-		boolean ingresado = detalles.stream().anyMatch(p-> p.getProducto().getId() == idProducto); //funcion lambda de la API Java 8
-		
+		boolean ingresado = detalles.stream().anyMatch(p -> p.getProducto().getId() == idProducto); // funcion lambda de
+																									// la API Java 8
+
 		if (!ingresado) {
 			detalles.add(detalleOrden);
 		}
-
 
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum(); // funcion lambda para sumar todos los
 																				// productos que esten en la lista
 		orden.setTotal(sumaTotal);
 		model.addAttribute("cart", detalles); // agrega todos los detalles que va pasando el usuario
 		model.addAttribute("orden", orden);
-		
 
 		return "usuario/carrito";
 	}
@@ -132,17 +135,22 @@ public class HomeController {
 
 	@GetMapping("/getCart")
 	public String getcart(Model model) {
-		
+
 		model.addAttribute("cart", detalles); // agrega todos los detalles que va pasando el usuario
-		model.addAttribute("orden", orden); //detalles y orden son atributos globales.
-		
+		model.addAttribute("orden", orden); // detalles y orden son atributos globales.
+
 		return "/usuario/carrito";
 	}
-	
+
 	@GetMapping("/order")
-	public String order() {
+	public String order(Model model) {
+
+		Usuario usuario = usuarioService.findById(1).get(); //como retorna un optional tengo que hacerlo con get
+		model.addAttribute("cart", detalles); // agrega todos los detalles que va pasando el usuario
+		model.addAttribute("orden", orden); // detalles y orden son atributos globales.
+		model.addAttribute("usuario", usuario);
 		
 		return "usuario/resumenorden";
 	}
-	
+
 }
